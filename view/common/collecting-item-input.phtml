@@ -1,6 +1,7 @@
 <?php
 $prompt = $cInput->prompt();
 $displayText = $cInput->displayText();
+$screen = $cInput->screen();
 if ('item' !== $prompt->inputType()) {
     $displayText = $this->escapeHtml($displayText);
 }
