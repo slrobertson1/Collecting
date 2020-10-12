@@ -126,7 +126,7 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
         $user = $auth->getIdentity(); // returns a User entity or null
 
         $form = new Form(sprintf('collecting_form_%s', $this->id()));
-//        $form->setWrapElements(false);
+        $form->setWrapElements(false);
         $this->form = $form; // cache the form
         $form->setAttribute('action', $url('site/collecting', [
             'form-id' => $this->id(),
@@ -162,11 +162,6 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
             if ($screen != $prompt->screen()) {
                 $screen = $prompt->screen();
                 $promptScreen = new CollectingFieldset($screen);
-                $promptScreen->setLabel($screen);
-                $promptScreen->setAttributes([
-                    'class' => 'collecting_form_fieldset',
-//                    'name' => $screen, // not allowed by Zend 3 :-(
-                ]);
             }
             $name = sprintf('prompt_%s', $prompt->id());
             switch ($prompt->type()) {
@@ -187,16 +182,16 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
                             $selectOptions = explode(PHP_EOL, $prompt->selectOptions());
                             $element = new Element\PromptSelect($name);
                             $element->setEmptyOption('Please choose one...') // @translate
-                            ->setValueOptions(array_combine($selectOptions, $selectOptions));
+                                ->setValueOptions(array_combine($selectOptions, $selectOptions));
                             break;
                         case 'item':
                             parse_str(ltrim($prompt->resourceQuery(), '?'), $resourceQuery);
                             $element = new Element\PromptItem($name);
                             $element->setApiManager($api);
                             $element->setEmptyOption('Please choose one...') // @translate
-                            ->setResourceValueOptions('items', function ($item) {
-                                return sprintf('#%s: %s', $item->id(), mb_substr($item->displayTitle(), 0, 80));
-                            }, $resourceQuery);
+                                ->setResourceValueOptions('items', function ($item) {
+                                    return sprintf('#%s: %s', $item->id(), mb_substr($item->displayTitle(), 0, 80));
+                                }, $resourceQuery);
                             break;
                         case 'url':
                             $element = new Element\PromptUrl($name);
@@ -214,7 +209,7 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
                             $terms = array_map('trim', explode(PHP_EOL, $response->getContent()->terms()));
                             $element = new Element\PromptSelect($name);
                             $element->setEmptyOption('Please choose one...') // @translate
-                            ->setValueOptions(array_combine($terms, $terms));
+                                ->setValueOptions(array_combine($terms, $terms));
                             break;
                         case 'numeric:timestamp':
                             if (!$collecting->inputTypeIsAvailable('numeric:timestamp')) {
@@ -292,24 +287,7 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
 //                    $form->add($element);
                     break;
                 case 'media':
-                    $promptScreen->add([
-                        'type' => 'hidden',
-                        'name' => $name,
-                    ]);
-                    // Note that the file index maps to the prompt ID.
-                    $promptScreen->add([
-                        'type' => 'file',
-                        'name' => sprintf('file[%s]', $prompt->id()),
-                        'options' => [
-                            'label' => $prompt->text(),
-                        ],
-                        'attributes' => [
-                            'required' => $prompt->required(),
-                        ],
-                    ]);
-
-                    $formElements[] = $promptScreen;
-//                    $mediaTypes->get($prompt->mediaType())->form($form, $prompt, $name);
+                    $mediaTypes->get($prompt->mediaType())->form($form, $prompt, $name);
                     break;
                 default:
                     // Invalid prompt type. Do nothing.

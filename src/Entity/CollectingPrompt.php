@@ -85,6 +85,11 @@ class CollectingPrompt extends AbstractEntity
     protected $required = false;
 
     /**
+     * @Column(type="text", nullable=true)
+     */
+    protected $screen;
+
+    /**
      * @ManyToOne(
      *     targetEntity="Omeka\Entity\Property"
      * )
@@ -234,6 +239,16 @@ class CollectingPrompt extends AbstractEntity
     public function getRequired()
     {
         return $this->required;
+    }
+
+    public function setScreen($screen)
+    {
+        $this->screen = trim($screen) ?: null;
+    }
+
+    public function getScreen()
+    {
+        return $this->screen;
     }
 
     public function setProperty(Property $property = null)

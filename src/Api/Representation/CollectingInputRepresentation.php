@@ -25,6 +25,7 @@ class CollectingInputRepresentation extends AbstractRepresentation
             'o-module-collecting:prompt' => $this->prompt(),
             // Must use self::displayText() since it's responsible for redaction
             'o-module-collecting:text' => $this->displayText(),
+            'o-module-collecting:screen' => $this->screen(),
         ];
     }
 
@@ -47,6 +48,11 @@ class CollectingInputRepresentation extends AbstractRepresentation
     public function text()
     {
         return $this->resource->getText();
+    }
+
+    public function screen()
+    {
+        return $this->resource->getScreen();
     }
 
     /**

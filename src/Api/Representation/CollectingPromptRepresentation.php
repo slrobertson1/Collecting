@@ -28,6 +28,7 @@ class CollectingPromptRepresentation extends AbstractRepresentation
             'o-module-collecting:custom_vocab' => $this->customVocab(),
             'o-module-collecting:media_type' => $this->mediaType(),
             'o-module-collecting:required' => $this->required(),
+            'o-module-collecting:screen' => $this->screen(),
             'o:property' => $property,
         ];
     }
@@ -77,6 +78,11 @@ class CollectingPromptRepresentation extends AbstractRepresentation
         return $this->resource->getRequired();
     }
 
+    public function screen()
+    {
+        return $this->resource->getScreen();
+    }
+
     public function property()
     {
         return $this->getAdapter('properties')
@@ -115,4 +121,18 @@ class CollectingPromptRepresentation extends AbstractRepresentation
         }
         return $displayText;
     }
+
+    /**
+     * Get the prompt screen, ready for display.
+     *
+     * @return string
+     */
+    public function displayScreen()
+    {
+        //        if (!$displayScreen && 'property' === $this->type()) {
+//            $displayScreen = $this->property()->label();
+//        }
+        return $this->screen();
+    }
+
 }

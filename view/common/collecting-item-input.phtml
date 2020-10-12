@@ -6,6 +6,6 @@ if ('item' !== $prompt->inputType()) {
 }
 ?>
 <div>
-    <h4><?php echo $this->escapeHtml($cInput->prompt()->displayText()); ?></h4>
+    <h4><?php echo $this->escapeHtml($cInput->prompt()->displayText() . "_collecting-item-input"); ?></h4>
     <div><?php echo nl2br($displayText); ?></div>
 </div>

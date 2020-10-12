@@ -33,10 +33,12 @@ var populatePromptRow = function(promptData) {
     }
     promptRow.find('.prompt-type-span').html(typeText);
     promptRow.find('.prompt-text-span').text(promptData['o-module-collecting:text']);
+    promptRow.find('.prompt-screen-span').text(promptData['o-module-collecting:screen']);
 
     // Populate the hidden inputs.
     promptRow.find('.prompt-type').val(promptData['o-module-collecting:type']);
     promptRow.find('.prompt-text').val(promptData['o-module-collecting:text']);
+    promptRow.find('.prompt-screen').val(promptData['o-module-collecting:screen']);
     promptRow.find('.prompt-input-type').val(promptData['o-module-collecting:input_type']);
     promptRow.find('.prompt-select-options').val(promptData['o-module-collecting:select_options']);
     promptRow.find('.prompt-resource-query').val(promptData['o-module-collecting:resource_query']);
@@ -145,6 +147,7 @@ $(document).ready(function() {
         promptsData = [{
             'o-module-collecting:type': 'property',
             'o-module-collecting:text': null,
+            'o-module-collecting:screen': null,
             'o-module-collecting:input_type': 'text',
             'o-module-collecting:select_options': null,
             'o-module-collecting:media_type': null,
@@ -300,6 +303,7 @@ $(document).ready(function() {
         var promptData = {
             'o-module-collecting:type': $('#prompt-type').val(),
             'o-module-collecting:text': $('#prompt-text').val(),
+            'o-module-collecting:screen': $('#prompt-screen').val(),
             'o-module-collecting:input_type': $('#prompt-input-type').val(),
             'o-module-collecting:select_options': $('#prompt-select-options').val(),
             'o-module-collecting:resource_query': $('#prompt-resource-query').val(),
