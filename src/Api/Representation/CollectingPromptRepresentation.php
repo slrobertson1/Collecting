@@ -129,11 +129,10 @@ class CollectingPromptRepresentation extends AbstractRepresentation
      */
     public function displayScreen()
     {
-        $displayScreen = $this->screen();
-//        if (!$displayScreen && 'property' === $this->type()) {
+        //        if (!$displayScreen && 'property' === $this->type()) {
 //            $displayScreen = $this->property()->label();
 //        }
-        return $displayScreen;
+        return $this->screen();
     }
 
 }

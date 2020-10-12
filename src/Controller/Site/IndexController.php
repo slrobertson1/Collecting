@@ -35,6 +35,14 @@ class IndexController extends AbstractActionController
             ->getContent();
 
         $form = $cForm->getForm();
+        $formParams = $this->params()->fromPost();
+//        echo '<script>';
+//        echo 'console.log("formParams:");';
+//        echo 'console.log(' . json_encode($formParams) . ');';
+//        echo '</script>';
+//        $this->messenger()->addSuccess(json_encode($formParams));
+        error_log('formParams: ' . json_encode($formParams));
+
         $form->setData($this->params()->fromPost());
         if ($form->isValid()) {
 
