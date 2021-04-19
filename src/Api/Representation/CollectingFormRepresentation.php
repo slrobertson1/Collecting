@@ -321,6 +321,21 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
             $form->add($formElement);
         }
 
+        $button = new \Zend\Form\Element\Button('prev');
+        $button->setLabel('Previous')
+            ->setValue('prev');
+        $form->add($button);
+
+        $button = new \Zend\Form\Element\Button('next');
+        $button->setLabel('Next')
+            ->setValue('next');
+        $form->add($button);
+
+//        $promptScreen = new CollectingFieldset('checkboxes');
+//        $promptScreen->setAttributes([
+//            'class' => 'collecting_form_fieldset',
+//        ]);
+
         $settings = $this->getServiceLocator()->get('Omeka\Settings');
         $siteSettings = $this->getServiceLocator()->get('Omeka\Settings\Site');
         $translator = $this->getServiceLocator()->get('MvcTranslator');
@@ -374,6 +389,8 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
             ]);
         }
 
+//        $form->add($promptScreen);
+
         // Add reCAPTCHA protection if keys are provided in global settings.
         $siteKey = $settings->get('recaptcha_site_key');
         $secretKey = $settings->get('recaptcha_secret_key');
@@ -395,6 +412,7 @@ class CollectingFormRepresentation extends AbstractEntityRepresentation
                 'csrf_options' => ['timeout' => 3600],
             ],
         ]);
+
         $form->add([
             'type' => 'submit',
             'name' => 'submit',

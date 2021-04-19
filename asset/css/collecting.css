@@ -14,3 +14,7 @@
 #prompts-table .actions {
     padding-left: 0;
 }
+
+.hidden {
+    display: none;
+}

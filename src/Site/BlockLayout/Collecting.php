@@ -46,6 +46,7 @@ class Collecting extends AbstractBlockLayout
         $view->collectingPrepareForm();
         $view->headLink()->appendStylesheet($view->assetUrl('css/collecting.css', 'Collecting'));
         $view->headScript()->appendFile($view->assetUrl('js/collecting-block.js', 'Collecting'));
+        $view->headScript()->appendFile($view->assetUrl('js/collecting-multistep-form.js', 'Collecting'));
     }
 
     public function render(PhpRenderer $view, SitePageBlockRepresentation $block)
